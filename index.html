@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script src="script.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.8/lottie.js"></script>
 </head>
+
+<header>
+    <!--Animated Logo Element-->
+    <div style="width: 600px; margin: 0 auto;" id="logoAnim"></div>
+
+    <script>
+        lottie.loadAnimation({
+            container: logoAnim, // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: false,
+            autoplay: true,
+            path: 'animations/data.json' // the path to the animation json
+        });
+    </script>
+</header>
+
 <body>
     <audio controls loop></audio><br>
     <canvas id="canvas" width="1280" height="800"></canvas>
 </body>
+
 </html>
