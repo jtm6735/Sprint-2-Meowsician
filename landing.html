@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="script.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.8/lottie.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet"> 
+    <title>Meowsician - Welcome</title>
+</head>
+
+<body class="flexframe">
+    <!--Animated Logo Element-->
+    <div style="max-width: 970px; margin: 0 auto;" id="logoAnim"></div>
+
+    <script>
+        lottie.loadAnimation({
+            container: logoAnim, // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'animations/data.json' // the path to the animation json
+        });
+    </script>
+
+<input type="file" name="file" id="file" class="inputfile" />
+<label for="file"><img src="icons/uploadicon.svg">Upload a song to start!</label>
+
+</body>
+
+</html>
