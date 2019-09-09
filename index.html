@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" type="text/css" href="indexCSS.css">
-    <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="script.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.8/lottie.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet"> 
+    <title>Meowsician - Welcome</title>
 </head>
-<body>
-    <div id="mainContent">
-        <div id="innerContent">
-            <img id="topSparkles" src="meowSparkles.png" width="50px" height="50px">
-            <img id="mainpageLogo" src="meowsicianLogo.png" alt="meowsician logo" width="485px" height="54px">
-            <img id="botSparkles" src="botSprkles.png" width="50px" height="50px">
-            <br>
-            <button>
-                <img id="uploadIcon" src="uploadIcon.png" alt="upload icon" width="15px" height="15px">
-                Upload a song to start
-            </button>
-        </div>
-    </div>
+
+<body class="flexframe">
+    <!-- <img id="topSparkles" src="media/green-zaggle.png">
+    <img id="botSparkles" src="media/blue-zaggle.png"> -->
+
+    <!--Animated Logo Element-->
+    <div style="max-width: 970px; margin: 0 auto;" id="logoAnim"></div>
+
+    <script>
+        lottie.loadAnimation({
+            container: logoAnim, // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'animations/data.json' // the path to the animation json
+        });
+    </script>
+
+<input type="file" name="file" id="file" class="inputfile" />
+<label for="file"><img src="icons/uploadicon.svg">Upload a song to start!</label>
+
 </body>
+
 </html>

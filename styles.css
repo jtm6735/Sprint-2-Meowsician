@@ -1,0 +1,168 @@
+.flexframe {
+    margin:0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #DEBAF6;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.inputfile+label {
+    margin-top: 120px;
+    padding: 24px;
+    font-family: Livvic;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    color: #000000;
+    background-color: #F8E71C;
+    display: inline-block;
+    cursor: pointer;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.sliderLabel {
+    font-family: Livvic;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+label img{
+    margin-right: 16px;
+    width:32px;
+}
+
+/*fixes keyboard nav*/
+.inputfile:focus+label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+/*hover state */
+.inputfile:focus+label,
+.inputfile+label:hover {
+    background-color: #F5A623;
+}
+
+label:hover {
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 1.5s;
+  
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+#mainContent{
+    width: 33%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20%;
+    font-family: 'Livvic', sans-serif;
+}
+
+#mainpageLogo{
+    text-align:center;
+    width:100%;
+    display:block;
+    margin:auto;
+    margin-bottom: 55px;
+}
+
+#uploadIcon{
+    position: relative;
+    top: 1px;
+    margin-right: 5px;
+}
+
+.sticker{
+    position: absolute;
+    transform: scale(0.5);
+}
+
+#botSparkles{
+    position: absolute;
+    left: 30%;
+    top: 50%
+}
+
+button{
+    vertical-align: middle;
+    background-color: #F8E71C;
+    border: none;
+    border: 2px solid #000;
+    padding: 12px 8px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 0.5em;
+    font-family: 'Livvic', sans-serif;
+    font-weight: bold;
+}
+
+button:hover{
+    border: none;
+    border: 2px solid #000;
+    background-color: #FCB80F;
+     padding: 12px 8px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition-duration: .4s;
+}
+
+#container {
+    height: 100%; 
+    width:100%; 
+} 
+
+#audio-controls, #canvas-container, #right {
+    display: inline-block; 
+    *display: inline; 
+    zoom: 1; 
+    vertical-align: top; 
+    font-size: 12px;
+} 
+
+#audio-controls {
+    width: 20%; 
+    text-align: left;
+    padding-bottom: 35px;
+}
+
+#canvas-container {
+    width: 60%; 
+    text-align: center;
+}
+
+#right-controls {
+    width: 20%;
+    background-color: green; 
+}
+

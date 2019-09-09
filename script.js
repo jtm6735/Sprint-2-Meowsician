@@ -15,7 +15,7 @@
     let bassFilter, trebleFilter;
     let bass=0, treble=0;
     
-    let mouth, ears, nose;
+    let mouth, leftEar, rightEar, nose, head, leftEye, rightEye, leftCheek, rightCheek;
 
     function init(){
         // set up canvas stuff
@@ -30,11 +30,23 @@
         
         // Find facial features
         mouth = new Image();
-        mouth.src = "/media/circle.png";
-        ears = new Image();
-        ears.src = "media/circle.png";
+        mouth.src = "/media/mouth.png";
+        leftEar = new Image();
+        leftEar.src = "media/left-ear.png";
+        rightEar = new Image();
+        rightEar.src = "media/right-ear.png";
         nose = new Image();
-        nose.src = "media/circle.png";
+        nose.src = "media/nose.png";
+        head = new Image();
+        head.src = "media/head.png";
+        leftEye = new Image();
+        leftEye.src = "media/left-eye.png";
+        rightEye = new Image();
+        rightEye.src = "media/right-eye.png";
+        leftCheek = new Image();
+        leftCheek.src = "media/left-cheek.png";
+        rightCheek = new Image();
+        rightCheek.src = "media/right-cheek.png";
 
         // get sound track <select> and Full Screen button working
         setupUI();
@@ -93,15 +105,6 @@
     }
     
     function setupUI(){
-        /*
-        document.querySelector("#trackSelect").onchange = function(e){
-            playStream(audioElement,e.target.value);
-        };
-        
-        document.querySelector("#fsButton").onclick = function(){
-            requestFullscreen(canvas);
-        };
-        
         document.querySelector("#bassBoost").onchange = function(e){
             bass = e.target.value;
             bassFilter.gain.value = bass;
@@ -113,7 +116,6 @@
             trebleFilter.gain.value = treble;
             document.getElementById("currentTreble").innerHTML = e.target.value;
         }
-        */
     }
     
     function playStream(audioElement,path){
@@ -142,37 +144,91 @@
         analyserNode.getByteFrequencyData(data); //frequency data 
         analyserNode.getByteTimeDomainData(waveData); // waveform data
         
-        // find averages of data
+        // mouth uses first third of audio range
         let mouthData = 0;
         for (var i = 0; i < 20; i++){
             mouthData = mouthData + data[i];
         }
         mouthData = mouthData / 20;
-         // uses first third of audio range
+
         let earData; // uses second third of audio range
-        let noseData; // uses final third of audio range
+
+        // nose uses last third of audio range
+        let noseData = 0;
+        for (var i = 20; i < 60; i++){
+            noseData = noseData + data[i];
+        }
+        noseData = noseData / 20;
 
         // clear screen
         ctx.fillStyle = backgroundColor;
-        ctx.fillRect(0, 0, 1280, 800);
+        ctx.fillRect(0, 0, 1080, 850);
         
         ctx.save();
-        ctx.fillStyle =backgroundColor;
+        ctx.fillStyle = backgroundColor;
         ctx.strokeStyle ="rgba(221, 221, 221, 0.4)";
         ctx.lineWidth = 2;
         
         ctx.restore();
 
-        //Draw Face
-        //Draw Mouth
-        ctx.drawImage(mouth, 525, 450+(mouthData*0.8));
-        
         //Draw Ears
-        ctx.drawImage(ears, 300, 50);
-        ctx.drawImage(ears, 750, 50);
+        ctx.drawImage(leftEar, 240, 50);
+        ctx.drawImage(rightEar, 615, 50);
+
+        //Draw Face
+        ctx.drawImage(head, 220, 150); // drw image with scaled width and height
+
+        //Draw Eyes
+        ctx.drawImage(leftEye, 380, 200);
+        ctx.drawImage(rightEye, 590, 200);
+
+        //Draw Cheeks
+        ctx.drawImage(leftCheek, 80, 510);
+        ctx.drawImage(rightCheek, 630, 510);
+
+        //Draw Mouth
+        ctx.save();
+        // scale the image and make sure it isn't too small
+        var scale = mouthData / 100;
+        var height;
+        if (mouth.height > (mouth.height * scale)){
+            height = mouth.height;
+        } else {
+            height = mouth.height * scale;
+        }
+        var width;
+        if (mouth.width > (mouth.width * scale)){
+            width = mouth.width;
+        } else {
+            width = mouth.width * scale;
+        }
+        var x = (ctx.canvas.width - width) / 2;
+        var y = ((ctx.canvas.height - height) / 2) + 215;
+        ctx.drawImage(mouth, x, y, width, height); // drw image with scaled width and height
+        //ctx.drawImage(mouth, 525+mouth.width/2, 450+mouth.height/2, ((100 + mouthData * 0.2)), ((100 + mouthData * 0.2)));
+        ctx.restore();
         
         //Draw Nose
-        ctx.drawImage(nose, 525, 280);
+        ctx.save();
+        // scale the image and make sure it isn't too small
+        var scale = noseData / 140;
+        var height;
+        if (nose.height > (nose.height * scale)){
+            height = nose.height;
+        } else {
+            height = nose.height * scale;
+        }
+        var width;
+        if (nose.width > (nose.width * scale)){
+            width = nose.width;
+        } else {
+            width = nose.width * scale;
+        }
+        var x = (ctx.canvas.width - width) / 2;
+        var y = ((ctx.canvas.height - height) / 2) + 85;
+        ctx.drawImage(nose, x, y, width, height); // drw image with scaled width and height
+        //ctx.drawImage(mouth, 525+mouth.width/2, 450+mouth.height/2, ((100 + mouthData * 0.2)), ((100 + mouthData * 0.2)));
+        ctx.restore();
 
         //Draw Song name, if we want to draw text? 
         /*

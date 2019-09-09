@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.8/lottie.js"></script>
+</head>
+
+<header>
+    <!--Animated Logo Element-->
+    <div style="width: 600px; margin: 0 auto;" id="logoAnim"></div>
+
+    <script>
+        lottie.loadAnimation({
+            container: logoAnim, // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: false,
+            autoplay: true,
+            path: 'animations/data.json' // the path to the animation json
+        });
+    </script>
+</header>
+
+<body>
+    <img class="sticker" style="top: 10%; left: 20%;" src="media/green-zaggle.png">
+    <img class="sticker" style="top: 35%; left: 10%;" src="media/lrg-orange-circle.png">
+    <img class="sticker" style="top: 75%; left: 85%;" src="media/red-oval.png">
+    <img class="sticker" style="top: 10%; left: 75%;" src="media/green-circle.png">
+    <img class="sticker" style="top: 25%; left: 10%;" src="media/sml-orange-circle.png">
+    <img class="sticker" style="top: 65%; left: 10%;" src="media/blue-oval.png">
+    <img class="sticker" style="top: 55%; left: 5%;" src="media/blue-circle.png">
+    <img class="sticker" style="top: 35%; left: 85%;" src="media/yellow-oval.png">
+    <img class="sticker" style="top: 55%; left: 90%;" src="media/yellow-circle.png">
+
+    <div id="container">
+        <div id="audio-controls">   
+            <audio controls loop></audio><br>
+            <label class="sliderLabel">Bass<br>
+                <input type="range" min="-30" max="30" value="0" class="slider" id="bassBoost">
+            </label><br>
+            <label class="sliderLabel">Treble<br>
+                <input type="range" min="-20" max="20" value="0" class="slider" id="trebleBoost">
+            </label><br>
+        </div>
+
+        <div id="canvas-container">
+            <canvas id="canvas" width="1080" height="850"></canvas>
+        </div>
+
+        <div id="right-controls">
+            
+        </div>
+    </div>
+    
+</body>
+
+</html>
