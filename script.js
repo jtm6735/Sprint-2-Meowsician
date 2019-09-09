@@ -1,4 +1,4 @@
-// Don't need canvas?
+
 // An IIFE ("Iffy") - see the notes in mycourses
 (function(){
     "use strict";
@@ -10,12 +10,13 @@
     let audioElement;
     let analyserNode;
 
+    let canvasBob;
     let canvas,ctx;
     let grad, songName;
     let bassFilter, trebleFilter;
     let bass=0, treble=0;
     
-    let mouth, leftEar, rightEar, nose, head, leftEye, rightEye, leftCheek, rightCheek;
+    let mouth, leftEar, rightEar, nose, head, leftEye, rightEye, leftCheek, rightCheek, leftEyebrow, rightEyebrow;
 
     function init(){
         // set up canvas stuff
@@ -47,12 +48,13 @@
         leftCheek.src = "media/left-cheek.png";
         rightCheek = new Image();
         rightCheek.src = "media/right-cheek.png";
+        leftEyebrow = new Image();
+        leftEyebrow.src = "media/left-eyebrow.png";
+        rightEyebrow = new Image();
+        rightEyebrow.src = "media/right-eyebrow.png";
 
         // get sound track <select> and Full Screen button working
         setupUI();
-        
-        // load and play default sound into audio element
-        playStream(audioElement, "BeeKooMix");
         
         // start animation loop
         update();
@@ -116,13 +118,18 @@
             trebleFilter.gain.value = treble;
             document.getElementById("currentTreble").innerHTML = e.target.value;
         }
-    }
-    
-    function playStream(audioElement,path){
-        songName = path;
-        audioElement.src = "media/" + path + ".mp3";
-        audioElement.play();
-        audioElement.volume = 0.2;
+
+        // get reference to file input and listen for changes
+        document.querySelector('#file').onchange = function(e){
+            var sound = document.getElementById('sound');
+            sound.src = URL.createObjectURL(this.files[0]);
+            //document.querySelector("#status").innerHTML = "Now playing: " + e.target.value;
+            audioElement.volume = 0.2;
+            audioElement.play();
+            sound.onend = function(e){
+                URL.revokeObjectURL(this.src); 
+            }
+        }
     }
     
     function update() { 
@@ -151,14 +158,19 @@
         }
         mouthData = mouthData / 20;
 
-        let earData; // uses second third of audio range
+        // uses second third of audio range
+        let earData = 0; 
+        for (var i = 20; i < 40; i++){
+            earData = earData + data[i];
+        }
+        earData = earData / 20;
 
         // nose uses last third of audio range
         let noseData = 0;
-        for (var i = 20; i < 60; i++){
+        for (var i = 40; i < 46; i++){
             noseData = noseData + data[i];
         }
-        noseData = noseData / 20;
+        noseData = noseData / 6;
 
         // clear screen
         ctx.fillStyle = backgroundColor;
@@ -172,15 +184,28 @@
         ctx.restore();
 
         //Draw Ears
-        ctx.drawImage(leftEar, 240, 50);
-        ctx.drawImage(rightEar, 615, 50);
+        ctx.save();
+        ctx.translate(390,200);
+        ctx.rotate(-(earData*Math.PI/180)/15);
+        ctx.drawImage(leftEar,(-2 * leftEar.width/3),(-2 * leftEar.width/3));
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(685,200);
+        ctx.rotate((earData*Math.PI/180)/15);
+        ctx.drawImage(rightEar,(-1 * rightEar.width/3),(-2 * rightEar.width/3));
+        ctx.restore();
 
         //Draw Face
         ctx.drawImage(head, 220, 150); // drw image with scaled width and height
 
         //Draw Eyes
-        ctx.drawImage(leftEye, 380, 200);
+        ctx.drawImage(leftEye, 370, 200);
         ctx.drawImage(rightEye, 590, 200);
+
+        //Draw Eyes
+        ctx.drawImage(leftEyebrow, 365, 180);
+        ctx.drawImage(rightEyebrow, 570, 190);
 
         //Draw Cheeks
         ctx.drawImage(leftCheek, 80, 510);
@@ -189,47 +214,51 @@
         //Draw Mouth
         ctx.save();
         // scale the image and make sure it isn't too small
-        var scale = mouthData / 100;
-        var height;
-        if (mouth.height > (mouth.height * scale)){
-            height = mouth.height;
+        var mouthScale = mouthData / 100;
+        var mouthHeight;
+        if (mouth.height > (mouth.height * mouthScale)){
+            mouthHeight = mouth.height;
         } else {
-            height = mouth.height * scale;
+            mouthHeight = mouth.height * mouthScale;
         }
-        var width;
-        if (mouth.width > (mouth.width * scale)){
-            width = mouth.width;
+        var mouthWidth;
+        if (mouth.width > (mouth.width * mouthScale)){
+            mouthWidth = mouth.width;
         } else {
-            width = mouth.width * scale;
+            mouthWidth = mouth.width * mouthScale;
         }
-        var x = (ctx.canvas.width - width) / 2;
-        var y = ((ctx.canvas.height - height) / 2) + 215;
-        ctx.drawImage(mouth, x, y, width, height); // drw image with scaled width and height
+        var x = (ctx.canvas.width - mouthWidth) / 2;
+        var y = ((ctx.canvas.height - mouthHeight) / 2) + 215;
+        ctx.drawImage(mouth, x, y, mouthWidth, mouthHeight); // drw image with scaled width and height
         //ctx.drawImage(mouth, 525+mouth.width/2, 450+mouth.height/2, ((100 + mouthData * 0.2)), ((100 + mouthData * 0.2)));
         ctx.restore();
         
         //Draw Nose
         ctx.save();
         // scale the image and make sure it isn't too small
-        var scale = noseData / 140;
-        var height;
-        if (nose.height > (nose.height * scale)){
-            height = nose.height;
+        var noseScale = noseData / 60;
+        var noseHeight;
+        if (nose.height > (nose.height * noseScale)){
+            noseHeight = nose.height;
         } else {
-            height = nose.height * scale;
+            noseHeight = nose.height * noseScale;
         }
-        var width;
-        if (nose.width > (nose.width * scale)){
-            width = nose.width;
+        var noseWidth;
+        if (nose.width > (nose.width * noseScale)){
+            noseWidth = nose.width;
         } else {
-            width = nose.width * scale;
+            noseWidth = nose.width * noseScale;
         }
-        var x = (ctx.canvas.width - width) / 2;
-        var y = ((ctx.canvas.height - height) / 2) + 85;
-        ctx.drawImage(nose, x, y, width, height); // drw image with scaled width and height
+        var x = (ctx.canvas.width - noseWidth) / 2;
+        var y = ((ctx.canvas.height - noseHeight) / 2) + 85;
+        ctx.drawImage(nose, x, y, noseWidth, noseHeight); // drw image with scaled width and height
         //ctx.drawImage(mouth, 525+mouth.width/2, 450+mouth.height/2, ((100 + mouthData * 0.2)), ((100 + mouthData * 0.2)));
         ctx.restore();
+        
+        canvasBob = earData / 100;
+        canvasBob = canvasBob + 10;
 
+        document.getElementById('canvas-container').style.top = canvasBob + '%';
         //Draw Song name, if we want to draw text? 
         /*
         ctx.save();
@@ -239,7 +268,7 @@
         ctx.restore();
         */
     } 
-    
+
     window.addEventListener("load",init);
 
     /*
@@ -258,3 +287,7 @@
         // .. and do nothing if the method is not supported
     }; */
 }());
+
+function navigateToMeowsician(){
+    window.location.href = 'meowsician.html';
+}

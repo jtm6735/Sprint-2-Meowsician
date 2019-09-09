@@ -18,7 +18,7 @@
 }
 
 .inputfile+label {
-    margin-top: 120px;
+    margin-top: 26px;
     padding: 24px;
     font-family: Livvic;
     font-style: normal;
@@ -37,7 +37,7 @@
     font-family: Livvic;
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 label img{
@@ -103,7 +103,6 @@ label:hover {
 
 .sticker{
     position: absolute;
-    transform: scale(0.5);
 }
 
 #botSparkles{
@@ -142,7 +141,7 @@ button:hover{
     width:100%; 
 } 
 
-#audio-controls, #canvas-container, #right {
+#audio-controls, #canvas-container, #right-controls {
     display: inline-block; 
     *display: inline; 
     zoom: 1; 
@@ -151,18 +150,133 @@ button:hover{
 } 
 
 #audio-controls {
-    width: 20%; 
+    width: 15%; 
+    height: 100%;
     text-align: left;
-    padding-bottom: 35px;
+    padding: 3%;
+    position: fixed;
+    top: 68%;
+    left: 3%;
 }
 
 #canvas-container {
     width: 60%; 
+    height: 100%;
+    position: fixed;
+    left: 20%;
     text-align: center;
+    float: center;
 }
 
 #right-controls {
-    width: 20%;
-    background-color: green; 
+    width: 17%;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    left: 78%;
+    top: 75%;
 }
 
+input[type=range] {
+    height: 41px;
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 100%;
+}
+  input[type=range]:focus {
+    outline: none;
+}
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    box-shadow: 0px 0px 1px #262626;
+    background: #C6C6C6;
+    border-radius: 1px;
+    border: 0px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 1px 1px 3px #545454;
+    border: 0px solid #00001E;
+    height: 26px;
+    width: 26px;
+    border-radius: 17px;
+    background: #4A90E2;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -11.5px;
+}
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #C6C6C6;
+  }
+  input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    box-shadow: 0px 0px 1px #262626;
+    background: #C6C6C6;
+    border-radius: 1px;
+    border: 0px solid #010101;
+  }
+  input[type=range]::-moz-range-thumb {
+    box-shadow: 1px 1px 3px #545454;
+    border: 0px solid #00001E;
+    height: 26px;
+    width: 26px;
+    border-radius: 17px;
+    background: #4A90E2;
+    cursor: pointer;
+  }
+  input[type=range]::-ms-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  input[type=range]::-ms-fill-lower {
+    background: #C6C6C6;
+    border: 0px solid #010101;
+    border-radius: 2px;
+    box-shadow: 0px 0px 1px #262626;
+  }
+  input[type=range]::-ms-fill-upper {
+    background: #C6C6C6;
+    border: 0px solid #010101;
+    border-radius: 2px;
+    box-shadow: 0px 0px 1px #262626;
+  }
+  input[type=range]::-ms-thumb {
+    margin-top: 1px;
+    box-shadow: 1px 1px 3px #545454;
+    border: 0px solid #00001E;
+    height: 26px;
+    width: 26px;
+    border-radius: 17px;
+    background: #4A90E2;
+    cursor: pointer;
+  }
+  input[type=range]:focus::-ms-fill-lower {
+    background: #C6C6C6;
+  }
+  input[type=range]:focus::-ms-fill-upper {
+    background: #C6C6C6;
+  }
+
+  #trebleBoost::-ms-thumb {
+    background: #59C276;
+}
+
+#trebleBoost::-webkit-slider-thumb { 
+    background: #59C276;
+}
+
+#trebleBoost::-moz-range-thumb { 
+    background: #59C276;
+}
+
+audio { 
+    border-radius: 7px;
+    width: 94%;
+}

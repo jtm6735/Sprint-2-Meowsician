@@ -21,38 +21,42 @@
             path: 'animations/data.json' // the path to the animation json
         });
     </script>
+    <style>
+        body {
+            background-image: url("media/background.png");
+        }    
+    </style>
 </header>
 
 <body>
-    <img class="sticker" style="top: 10%; left: 20%;" src="media/green-zaggle.png">
-    <img class="sticker" style="top: 35%; left: 10%;" src="media/lrg-orange-circle.png">
-    <img class="sticker" style="top: 75%; left: 85%;" src="media/red-oval.png">
-    <img class="sticker" style="top: 10%; left: 75%;" src="media/green-circle.png">
-    <img class="sticker" style="top: 25%; left: 10%;" src="media/sml-orange-circle.png">
-    <img class="sticker" style="top: 65%; left: 10%;" src="media/blue-oval.png">
-    <img class="sticker" style="top: 55%; left: 5%;" src="media/blue-circle.png">
-    <img class="sticker" style="top: 35%; left: 85%;" src="media/yellow-oval.png">
-    <img class="sticker" style="top: 55%; left: 90%;" src="media/yellow-circle.png">
-
     <div id="container">
-        <div id="audio-controls">   
-            <audio controls loop></audio><br>
-            <label class="sliderLabel">Bass<br>
-                <input type="range" min="-30" max="30" value="0" class="slider" id="bassBoost">
-            </label><br>
-            <label class="sliderLabel">Treble<br>
-                <input type="range" min="-20" max="20" value="0" class="slider" id="trebleBoost">
-            </label><br>
-        </div>
-
         <div id="canvas-container">
             <canvas id="canvas" width="1080" height="850"></canvas>
         </div>
 
+        <!-- put stickers here so they're over canvas but under controls -->
+        <img class="sticker" style="top: 464px; left: 288px;" src="media/green-zaggle.png">
+        <img class="sticker" style="top: -30px; left: 1336px;" src="media/red-oval.png">
+        <img class="sticker" style="top: 295px; left: 1435px;" src="media/green-circle.png">
+        <img class="sticker" style="top: 493px; left: 1400px;" src="media/yellow-oval.png">
+
+        <div id="audio-controls">  
+            <label class="sliderLabel">Treble<br>
+                <input type="range" min="-20" max="20" value="0" class="slider" id="trebleBoost">
+            </label> 
+            <label class="sliderLabel">Bass<br>
+                <input type="range" min="-30" max="30" value="0" class="slider" id="bassBoost">
+            </label><br>
+        </div>
+
         <div id="right-controls">
+            <audio id="sound" controls loop></audio>
             
+            <input type="file" name="file" id="file" class="inputfile"/>
+            <label for="file"><img src="icons/uploadicon.svg">Choose Music</label>
         </div>
     </div>
+    
     
 </body>
 
