@@ -155,7 +155,7 @@ button:hover{
     text-align: left;
     padding: 3%;
     position: fixed;
-    top: 68%;
+    top: 62%;
     left: 3%;
 }
 
@@ -174,9 +174,10 @@ button:hover{
     position: fixed;
     text-align: center;
     left: 78%;
-    top: 75%;
+    top: 65%;
 }
 
+/* input[type=range] styles from https://www.cssportal.com/style-input-range/ */
 input[type=range] {
     height: 41px;
     -webkit-appearance: none;
@@ -278,5 +279,5 @@ input[type=range]::-webkit-slider-thumb {
 
 audio { 
     border-radius: 7px;
-    width: 94%;
+    width: 100%;
 }

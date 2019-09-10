@@ -31,13 +31,13 @@
         
         // Find facial features
         mouth = new Image();
-        mouth.src = "/media/mouth.png";
+        mouth.src = "media/mouth-image.png";
         leftEar = new Image();
         leftEar.src = "media/left-ear.png";
         rightEar = new Image();
         rightEar.src = "media/right-ear.png";
         nose = new Image();
-        nose.src = "media/nose.png";
+        nose.src = "media/nose-image.png";
         head = new Image();
         head.src = "media/head.png";
         leftEye = new Image();
@@ -110,13 +110,11 @@
         document.querySelector("#bassBoost").onchange = function(e){
             bass = e.target.value;
             bassFilter.gain.value = bass;
-            document.getElementById("currentBass").innerHTML = e.target.value;
         }
         
         document.querySelector("#trebleBoost").onchange = function(e){
             treble = e.target.value;
             trebleFilter.gain.value = treble;
-            document.getElementById("currentTreble").innerHTML = e.target.value;
         }
 
         // get reference to file input and listen for changes

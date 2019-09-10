@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>Meowsician</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
     <script src="script.js"></script>
@@ -41,6 +42,7 @@
         <img class="sticker" style="top: 493px; left: 1400px;" src="media/yellow-oval.png">
 
         <div id="audio-controls">  
+            <audio id="sound" controls loop></audio><br><br>
             <label class="sliderLabel">Treble<br>
                 <input type="range" min="-20" max="20" value="0" class="slider" id="trebleBoost">
             </label> 
@@ -50,10 +52,11 @@
         </div>
 
         <div id="right-controls">
-            <audio id="sound" controls loop></audio>
-            
             <input type="file" name="file" id="file" class="inputfile"/>
             <label for="file"><img src="icons/uploadicon.svg">Choose Music</label>
+
+            <input id="file" class="inputfile"/>
+            <label >Change Cat</label>
         </div>
     </div>
     
